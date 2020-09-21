@@ -1,0 +1,40 @@
+{
+  "name": "tstwbsrv",
+  "version": "!version!",
+  "arch": "!arch!",
+  "release": "1",
+  "summary": "test web server",
+  "group": "Applications/Internet",
+  "license": "LICENSE",
+  "url": "http://127.0.0.1/",
+  "description": "More about test webserver",
+  "changelog-cmd": "changelog rpm",
+  "files": [
+    {
+      "from": "build/!arch!/tstwbsrv",
+      "to": "%{_bindir}/",
+      "base": "build/!arch!/",
+      "type": ""
+    },
+    {
+      "from": "assets/**/**",
+      "to": "%{_datarootdir}/!name!/",
+      "base": "",
+      "type": ""
+    },
+    {
+      "from": "assets/**/**",
+      "to": "%{_datarootdir}/!name!/other",
+      "base": "assets",
+      "type": ""
+    },
+    {
+      "from": "rpm/tstwbsrv.service",
+      "to": "%{_unitdir}/",
+      "base": "rpm"
+    }
+  ],
+  "postinst": "rpm/postinst.sh",
+  "prerm": "rpm/prerm.sh",
+  "postrm": "rpm/postrm.sh"
+}

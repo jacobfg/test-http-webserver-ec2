@@ -1,0 +1,12 @@
+[Unit]
+Description=Test Webserver
+
+[Service]
+PIDFile=/var/run/tstwbsrv
+User=tstwbsrv
+Group=tstwbsrv
+WorkingDirectory=/var/run/tstwbsrv
+ExecStart=/usr/bin/tstwbsrv -c /etc/pki/tls/certs/tstwbsrv/localhost.crt
+
+[Install]
+WantedBy=multi-user.target
