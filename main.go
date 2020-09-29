@@ -25,6 +25,14 @@ var (
     certfile string
 )
 
+// type T struct {
+//     A string
+//     B struct {
+//             RenamedC int   `yaml:"c"`
+//             D        []int `yaml:",flow"`
+//     }
+// }
+
 func serveHTTP(mux *http.ServeMux, errs chan<- error) {
     errs <- http.ListenAndServe(":8080", mux)
 }
@@ -54,12 +62,16 @@ func get(part string) (string, error) {
 	resp, err := http.Get(addr + part)
 	if err != nil {
 		return "", err
-	}
-	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-	return string(body), nil
+    }
+    if resp.StatusCode == 200 {
+        body, err := ioutil.ReadAll(resp.Body)
+        if err != nil {
+            return "", err
+        }
+        return string(body), nil
+    } else {
+        return "null", nil
+    }
 }
 
 func AWSInfo(w http.ResponseWriter, r *http.Request) {
